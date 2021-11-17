@@ -1,3 +1,13 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  get 'pages/index'
+  root "pages#index"
+
+  #match "*path", to: "pages#index", via: :all
+
+  namespace :api do
+    namespace :v1 do
+      resources :courses, param: :nick
+      resources :review, only: [:create, :destroy]
+    end
+  end
 end
