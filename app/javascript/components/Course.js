@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import axios from 'axios'
 import styled from 'styled-components'
+import ReviewForm from './ReviewForm'
 
 const Wrapper = styled.div `
   left-margin: auto;
@@ -60,13 +61,27 @@ const Course = (props) => {
     axios.get(`/api/v1/courses/${nick}`)
     .then( r=> {
       setCourse(r.data.data);
-      setReview(r.data.included)
-      console.log(r)
-      setLoaded(true)
+      setReview(r.data.included);
+      console.log(r);
+      setLoaded(true);
     })
     .catch( r=> { console.log(r)} )
   }, [course.length])
 
+  const handleChange = (event) => { 
+    event.preventDefault(); 
+    setReview(Object.assign(
+      review,
+      {[event.target.name]: event.target.value}
+    ))
+  }
+  const handleSubmit = (event) => { 
+    event.preventDefault();
+    const course_id = course.id
+    axios.post("/api/v1/reviews", {review, course_id })
+      .then( response => { debugger })
+      .catch( response => {});
+  }
 
   return(
     <Wrapper>
@@ -87,7 +102,12 @@ const Course = (props) => {
       </Column>
       
       <Column>
-          <div className="review-form"> [Review form goes here.] </div>
+          <ReviewForm
+            handleChange = { handleChange }
+            handleSubmit = { handleSubmit }
+            attributes = { course.attributes }
+            review = { review }
+          />
       </Column>
 
     </Wrapper>
