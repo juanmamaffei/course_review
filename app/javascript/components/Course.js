@@ -65,24 +65,46 @@ const Course = (props) => {
       console.log(r);
       setLoaded(true);
     })
-    .catch( r=> { console.log(r)} )
+    .catch( r => { console.log(r)} )
   }, [course.length])
 
   const handleChange = (event) => { 
     event.preventDefault(); 
     setReview(Object.assign(
       review,
-      {[event.target.name]: event.target.value}
+      { [event.target.name]: event.target.value }
+      
     ))
+    console.log(review)
   }
   const handleSubmit = (event) => { 
     event.preventDefault();
+
+    const csrf = document.querySelector("[name=csrf-token]").content
+    axios.defaults.headers.common["CSRF-TOKEN"] = csrf
+
     const course_id = course.id
-    axios.post("/api/v1/reviews", {review, course_id })
-      .then( response => { debugger })
-      .catch( response => {});
+    console.log(review)
+
+    axios.post("/api/v1/reviews", {
+      ["title"]: review.title,
+      ["description"]: review.description,
+      ["score"]: review.score,
+      course_id
+      })
+      .then(response => {
+        const included = [...course.included, response.data]
+        setReview({title: '', description: '', score: 0})
+      })
+      .catch( response => {console.log(review)});
   }
 
+  const setRating = (score, evnt) => {
+    evnt.preventDefault();
+
+    setReview({...review,score})
+    console.log(review)
+  }
   return(
     <Wrapper>
       <Column>
@@ -105,6 +127,7 @@ const Course = (props) => {
           <ReviewForm
             handleChange = { handleChange }
             handleSubmit = { handleSubmit }
+            setRating = { setRating }
             attributes = { course.attributes }
             review = { review }
           />
