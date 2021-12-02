@@ -4,6 +4,9 @@ import axios from 'axios'
 import styled from 'styled-components'
 import ReviewForm from './ReviewForm'
 import Review from './Review'
+import SelectedStar from './images/SelectedStar'
+import Monstruo from 'images/monstruo.png'
+
 
 const Wrapper = styled.div `
   left-margin: auto;
@@ -13,12 +16,13 @@ const Wrapper = styled.div `
 
 `
 const Column = styled.div `
-  background: #fff;
+  background: #E5E7EB;
+  color: #111827;
   height: 100vh;
   overflow: scroll;
 
   &:last-child {
-    background: black;
+    overflow: hidden;
   }
 `
 const Main = styled.div `
@@ -40,10 +44,29 @@ const TotalReviews = styled.div `
   font-size: 18px;
   padding: 10px 0;
 `
-const TotalOutOf = styled.div `
+
+const StarsPainted = styled.div `
+
   font-size: 18px;
   font-weight: bold;
-  padding: 10px 0;
+  width: 100%;
+  background-image: url("data:image/svg+xml;charset=UTF-8,${SelectedStar}");
+  background-repeat: repeat-x;
+  background-size: 20%;
+  height: 66px;
+
+`
+const PaintedWrapper = styled.div`
+  width: ${ 50 } %;
+`
+const Average = styled.span `
+  color: green;
+`
+const BackButton = styled.div `
+  margin: 12px;
+  padding: 12px;
+  font-size:18px;
+  color: #7c3aed;
 `
 const Course = (props) => {
     
@@ -78,7 +101,6 @@ const Course = (props) => {
     axios.defaults.headers.common["CSRF-TOKEN"] = csrf
 
     const course_id = course.id
-    console.log(actualReview)
 
     axios.post("/api/v1/reviews", {
       ["title"]: actualReview.title,
@@ -87,9 +109,6 @@ const Course = (props) => {
       course_id
       })
       .then(response => {
-        //const included = [...course.relationships.reviews.data, response.data.data.attributes];
-        //console.log(included);
-        //console.log(response);
         setActualReview({title: '', description: '', score: 0})
         setReview([...review, response.data.data]);
         
@@ -103,12 +122,10 @@ const Course = (props) => {
   const setRating = (score, evnt) => {
     evnt.preventDefault();
     setActualReview({...actualReview,score})
-    console.log("Actual review", actualReview)
   }
 
   let ReviewList, totalScore = 0
   if (loaded && review) {
-    // console.log(review)
     ReviewList = review.slice(0).reverse().map((item, index) => {
       totalScore = Number(totalScore) + Number(item.attributes.score)
       return (
@@ -116,6 +133,7 @@ const Course = (props) => {
       )
     })
   }
+  let averageScore = Number(totalScore) / Number(review.length)
 
   return(
     <Wrapper>
@@ -124,17 +142,17 @@ const Course = (props) => {
       <Fragment>
         <Column>
           <Main>
-            
-              
-            <Header>
-              <h1><img src={ course.attributes.image_url }></img> { course.attributes.name }</h1>
-              <TotalReviews>{ review.length } user reviews</TotalReviews>
-              
-              <TotalOutOf>{ Number(totalScore) / Number(review.length) } out of 5</TotalOutOf>
-            </Header>
-          
+            <BackButton>
+              <Link to="/courses"> 🔙 Back to courses</Link>
+            </BackButton>  
+          <Header>
+            <h1><img src={ course.attributes.image_url || Monstruo }></img> { course.attributes.name }</h1>
+            <TotalReviews>{ review.length } user reviews</TotalReviews>
+            <Average>{ (Math.round(averageScore*100)/100)} / 5 stars</Average>
+          </Header>
+
           { ReviewList }    
-          <Link to="/courses">Courses</Link>
+          
           </Main>
         </Column>
         

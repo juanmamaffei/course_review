@@ -30,43 +30,21 @@ display: flex;
 flex-direction: columns;
 `
 
-const Icon = styled.button`
-  display: flex;
-  box-shadow: none;
-  border-radius: 4px;
-  margin: 0 4px;
-  i {
-    font-size: 18px;
-  }
-`
-
-const Author = styled.div`
-  font-size: 16px;
-  font-family: 'Poppins-Bold';
-  margin: 0 8px;
-`
-
 const RatingContainer = styled.div`
   display: flex;
   flex-direction: row;
-`
-const AvatarWrapper = styled.div`
-  width: 25px;
-  height: 25px;
-  background: green;
-  border-radius: 100%;
-  margin-right: 12px;
-  margin-bottom: -12px;
-  svg {
-    width: 25px;
-    height: 25px;
-  }
 `
 const Starx = styled.div`
   display: flex;
   position: relative;
   i {
-    background-image: url("data:image/svg+xml;charset=UTF-8,${SelectedStar}");
+    &.fill {
+      background-image: url("data:image/svg+xml;charset=UTF-8,${SelectedStar}");
+    }
+    &.noFill {
+      background-image: url("data:image/svg+xml;charset=UTF-8,${Star}");
+      opacity: 0.7;
+    }
     height: 24px;
     width: 24px;
     margin: 2px;
@@ -79,9 +57,16 @@ const Starx = styled.div`
 
 const ScoreIcons = (s) => {
 	let arr = []
-	for(let step=1; step <= parseInt(s); step++) {
-		 arr.push(<i></i>)
-	}
+  
+  for(let p=1; p<6;p++){
+    if (s>=p) {
+      arr.push(<i className='fill' key={"'star_'" + p }></i>)
+      
+    } else {
+      arr.push(<i className='noFill' key={"'star_'" + p } ></i>)
+    }
+  }
+
 	return arr
 	
 }

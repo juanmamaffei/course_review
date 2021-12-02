@@ -27,6 +27,7 @@ const Grid = styled.div`
     grid-gap: 20px;
     padding: 20px;
     width: 100%;
+    
 `
 
 

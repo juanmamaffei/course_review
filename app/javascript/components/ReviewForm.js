@@ -10,10 +10,10 @@ const RatingContainer = styled.div `
   font-size: 18px;
   padding: 4px 0 10px 0;
   border: 1px solid #e6e6e6;
-  background: #fff;  
+  background: #C4B5FD;  
 `
 const RatingBox = styled.div `
-  background: #fff;
+  background: #C4B5FD;
   
   display: flex;
   justify-content: center;
@@ -69,22 +69,19 @@ const Field = styled.div`
 `
 const SubmitButton = styled.button`
   color: #fff;
-  background-color: #71b406;
+  background-color: #10B981;
   border-radius: 4px;   
   margin-top: 12px;
   padding:12px 12px;  
-  border: 1px solid #71b406;
   width:100%;
   font-size:18px;
   cursor: pointer;
   transition: ease-in-out 0.2s;
   &:hover {
-    background: #71b406;
-    border-color: #71b406;
+    background: #DC2626;
   }
 `
 const Wrapper = styled.div`
-  background:white;
   padding:20px;
   margin-left: 15px;
   border-radius: 0;
@@ -92,8 +89,9 @@ const Wrapper = styled.div`
   border-left: 1px solid rgba(0,0,0,0.1);
   height: 100vh;
   padding-top: 100px;
-  background: black;
+  background-color: #7c3aed;
   padding-right: 80px;
+  overflow: hidden;
 `
 const Headline = styled.div`
   font-size:20px;
@@ -119,8 +117,14 @@ const ReviewForm = (props) => {
   const ratingOptions = [5,4,3,2,1].map((score, index) => {
       return(
         <Fragment>
-          <input type="radio" value="score" name= "rating" checked={props.review.score == score} onChange={()=>console.log(score)} id={`rating-${score}`} key = {`radio_${index}`}></input>
-          <label onClick={ props.setRating.bind(this,score) } key = {`label_${index}`}></label>
+          <input type="radio"
+            value="score"
+            name= "rating"
+            checked={props.review.score == score}
+            onChange={()=>console.log(score)}
+            id={`rating-${score}`}
+            key= {'input_'+index}></input>
+          <label onClick={ props.setRating.bind(this,score) } key= {'radio_'+ index }></label>
         </Fragment>
       )
     }
