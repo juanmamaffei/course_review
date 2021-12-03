@@ -149,7 +149,7 @@ const Course = (props) => {
           <Header>
             <h1><img src={ course.attributes.image_url || Monstruo }></img> { course.attributes.name }</h1>
             <TotalReviews>{ review.length } user reviews</TotalReviews>
-            <Average>{ (Math.round(averageScore*100)/100)} / 5 stars</Average>
+            <Average>{ (Math.round(averageScore*100)/100) || 0 } / 5 stars</Average>
           </Header>
 
           { ReviewList }    
