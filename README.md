@@ -1,24 +1,11 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Demo in course-ranking-demo.herokuapp.com
 
-Things you may want to cover:
+This application is a sample for creating reviews in different courses. It works with an API builded in Rails 6 and React 17 for web components. The database system is Postgres.
 
-* Ruby version
+## Samples
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+![image](public/readme/01.png)
+![image](public/readme/02.png)
+![image](public/readme/03.png)
