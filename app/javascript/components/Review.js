@@ -5,21 +5,21 @@ import SelectedStar from './images/SelectedStar'
 
 const Card = styled.div`
   border-radius: 4px;
-  border: 1px solid #E6E6E6;
-  padding: 20px;
-  margin: 0px 0px 20px 0px;
+  border: 3px solid #FCD34D;
+  padding: 10px;
+  margin: 10px 15px 0 0;
   position: relative;
-  margin-right: 12px;
+  background-color: #FCD34D; 
 `
 
 const Title = styled.div`
-  padding: 20px 0px 0px 0px;
-  font-family: 'Poppins-Bold';
+  padding: 10px 0px 0px 0px;
+  // font-family: 'Poppins-Bold';
   font-size: 18px;
 `
 
 const Description = styled.div`
-  padding: 0 0 20px 0;
+  padding: 0 0 10px 0;
   font-size: 14px;
 `
 const Options = styled.div`
@@ -77,7 +77,6 @@ const Review = (props) => {
 		<Card>
 			<Title>{ props.attributes.title }</Title>
 			<Description>{ props.attributes.description }</Description>
-			<div className="score">{ props.attributes.score } STARS</div>
 			<Starx>{ ScoreIcons(props.attributes.score) }</Starx>
 		</Card>
 	)

@@ -10,10 +10,9 @@ const RatingContainer = styled.div `
   font-size: 18px;
   padding: 4px 0 10px 0;
   border: 1px solid #e6e6e6;
-  background: #C4B5FD;  
+  background: #F9FAFB;
 `
 const RatingBox = styled.div `
-  background: #C4B5FD;
   
   display: flex;
   justify-content: center;
@@ -69,7 +68,7 @@ const Field = styled.div`
 `
 const SubmitButton = styled.button`
   color: #fff;
-  background-color: #10B981;
+  background-color: #DB2777;
   border-radius: 4px;   
   margin-top: 12px;
   padding:12px 12px;  

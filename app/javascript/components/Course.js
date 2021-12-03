@@ -63,9 +63,10 @@ const Average = styled.span `
   color: green;
 `
 const BackButton = styled.div `
-  margin: 12px;
+  margin: 12px 0 0 0;
   padding: 12px;
   font-size:18px;
+  font-weight: bold;
   color: #7c3aed;
 `
 const Course = (props) => {
