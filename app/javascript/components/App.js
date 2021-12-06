@@ -40,7 +40,7 @@ const Button = styled.div `
 const App = () => {
   return(<Container>
     <h1>Welcome, visitor 👋.</h1>
-    <p>This is a sample tiny app builded with Rails and React 💪.</p>
+    <p>This is a sample tiny app built with Rails and React 💪.</p>
     <Link to="/courses"><Button>Enter</Button></Link>
     <a href="https://github.com/juanmamaffei/course_review"><Button>Repository</Button></a>
   </Container>)
