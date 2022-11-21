@@ -1,3 +1,5 @@
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
 # README
 
 Click [here](https://course-ranking-demo.herokuapp.com) for a [demo](https://course-ranking-demo.herokuapp.com).
